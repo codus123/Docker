@@ -1,0 +1,46 @@
+도커 1일차 복습
+1. 리눅스 기술 중 도커에서 이용되는 3가지 기술
+   chroot, namespace, cgroup
+2. 도커의 공식적인 레지스트리 이름
+   hub.docker.com(도커 허브)
+3. 도커 docker.io와 docker.ce 차이
+   docker.io는 "Debin/Ubuntu"의 공식 레포지토리에서 제공되는 릴리즈
+   docker.ce는 "docker.com"에서 직접 제공되는 인증된 릴리즈
+4. docker.io 설치 명령어
+   sudo apt install docker.io
+5. 도커의 장단점
+   장점: 한 대의 물리 서버에 여러 대의 서버를 띄울 수 있음, 서버 관리가 용이, 서버 고수가 아니어도 다루기 쉬움
+   단점: 리눅스용 소프트웨어만 지원, 호스트 서버에 문제가 생기면 모든 컨테이너에 영향을 미침, 컨테이너 하나를 장기간에 걸쳐 사용할 경우 장점이 없음
+6. 도커 라이프 사이클을 그리시오.
+   Created -> Started -> Running -> Stopped -> Deleted
+                                           -> Paused
+7. 도커 버전 확인 명령어
+   docker version
+8. nginx 이미지 검색
+   docker search nginx
+9. nginx 이미지 다운로드
+   docker pull nginx
+10. 도커 컨테이너 실행
+   docker run --name tk -d -p 8080:8080 tomcat
+   docker run -p -t 80:80 --name nx nginx
+11. 도커의 확인 명령어 3개(실행중, 스톱된 컨테이너, 이미지)
+   docker ps, docker ps -a, docker images(=docker image ls)
+12. 도커의 스톱, 컨테이너 삭제, 이미지 삭제 명령어
+   docker stop [컨테이너 명], docker rm [컨테이너 명], docker rmi [이미지 명]
+13. 도커 임시 컨테이너 생성 옵션을 적으시오.
+   docker build -t [이름]
+14. 톰캣 웹 서버를 실행시키고 스톱시키시오. 임시 컨테이너 생성 옵션을 활용
+   docker run tomcat
+   docker stop tomcat
+15. 컨테이너 스톱시 삭제 옵션을 적으시오.
+   -rm
+16. mysql 컨테이너를 실행하고, 데이터베이스를 확인하시오. 환경변수 활용(패스워드)
+   docker run -d -e MYSQL_ROOT_PASSWORD=rootpass \
+   -e MYSQL_DATABASE=mydb \
+   -e MYSQL_USER=user \
+   -e MYSQL_PASSWORD=password \
+   mysql
+17. 도커 내부 쉘 실행하는 옵션을 적으시오.
+   -it
+18. 데비안 리눅스를 실행시키되 내부 쉘로 바로 진입하는 옵션을 사용해보시오.
+   docker run -it debian bash
